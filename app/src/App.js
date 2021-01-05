@@ -1,22 +1,30 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
+
+// import logo from './logo.svg';
 import './App.css';
+import PostsOverview from "./PostsOverview";
 
 function App() {
+  const [nrOfPosts, setNrOfPosts] = useState(1);
+  const [showGraph, setShowGraph] = useState(false);
+
+  function onFormSubmit(event) {
+    event.preventDefault()
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <form onSubmit={(event) => {
+          onFormSubmit(event)
+        }}>
+          <label htmlFor="postsInput">Number of posts to make graph for:</label>
+          <input type="number" id="postsInput" min="1" max="9999" value={nrOfPosts}
+                 onChange={(event) => {
+                   setNrOfPosts(parseInt(event.target.value))
+                 }}/>
+        </form>
+        {showGraph && <PostsOverview postsToFetch={nrOfPosts}/>}
       </header>
     </div>
   );
