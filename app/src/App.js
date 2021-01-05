@@ -21,9 +21,11 @@ function App() {
           <label htmlFor="postsInput">Number of posts to make graph for:</label>
           <input type="number" id="postsInput" min="1" max="9999" value={nrOfPosts}
                  onChange={(event) => {
-                   setNrOfPosts(parseInt(event.target.value))
+                   setShowGraph(false);
+                   setNrOfPosts(parseInt(event.target.value));
                  }}/>
         </form>
+        <button onClick={() => setShowGraph(true)}>Show graph</button>
         {showGraph && <PostsOverview postsToFetch={nrOfPosts}/>}
       </header>
     </div>
